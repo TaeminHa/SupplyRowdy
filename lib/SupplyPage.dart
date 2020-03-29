@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'Info.dart';
 
-class HomePage extends StatefulWidget {
+class SupplyPage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<SupplyPage> {
 
   TextEditingController dairyController;
   TextEditingController familyController;
@@ -69,18 +70,20 @@ class _HomePageState extends State<HomePage> {
       ),
       body: ListView(children: <Widget>[
         Container(
-            height: 435,
+            height: 450,
             color: Colors.lightBlueAccent[100],
             child: Row(children: <Widget>[
               SizedBox(
                 width: 10,
-                height: 10,
               ),
               Expanded(
                   child: Column(children: <Widget>[
                     TextField(
                       controller: familyController,
                       decoration: InputDecoration(
+                          labelStyle: TextStyle(
+                              fontSize: 24
+                          ),
                           border: InputBorder.none,
                           hintText: '(1..2..3..)',
                           labelText: "Total Family Members"),
@@ -97,6 +100,9 @@ class _HomePageState extends State<HomePage> {
                     TextField(
                       controller: fruitController,
                       decoration: InputDecoration(
+                          labelStyle: TextStyle(
+                              fontSize: 22
+                          ),
                           border: InputBorder.none,
                           hintText: '(1..2..3..)',
                           labelText: "Total fruit servings"),
@@ -104,12 +110,16 @@ class _HomePageState extends State<HomePage> {
                         setState(() {
                           fruitTotal = int.parse(text);
                           daysFruit = (fruitTotal)/(spdFruit*familyTotal);
+                          daysFruit = num.parse(daysFruit.toStringAsFixed(1));
                         });
                       },
                     ),
                     TextField(
                       controller: vegetableController,
                       decoration: InputDecoration(
+                          labelStyle: TextStyle(
+                              fontSize: 22
+                          ),
                           border: InputBorder.none,
                           hintText: '(1..2..3..)',
                           labelText: "Total vegetable servings"),
@@ -117,12 +127,16 @@ class _HomePageState extends State<HomePage> {
                         setState(() {
                           vegetableTotal = int.parse(text);
                           daysVegetable = (vegetableTotal)/(spdVegetable*familyTotal);
+                          daysVegetable = num.parse(daysVegetable.toStringAsFixed(1));
                         });
                       },
                     ),
                     TextField(
                       controller: grainController,
                       decoration: InputDecoration(
+                          labelStyle: TextStyle(
+                              fontSize: 22
+                          ),
                           border: InputBorder.none,
                           hintText: '(1..2..3..)',
                           labelText: "Total grain servings"),
@@ -130,12 +144,16 @@ class _HomePageState extends State<HomePage> {
                         setState(() {
                           grainTotal = int.parse(text);
                           daysGrains = (grainTotal)/(spdGrain*familyTotal);
+                          daysGrains = num.parse(daysGrains.toStringAsFixed(1));
                         });
                       },
                     ),
                     TextField(
                       controller: dairyController,
                       decoration: InputDecoration(
+                        labelStyle: TextStyle(
+                          fontSize: 22
+                        ),
                           border: InputBorder.none,
                           hintText: '(1..2..3..)',
                           labelText: "Total dairy product servings"),
@@ -143,13 +161,16 @@ class _HomePageState extends State<HomePage> {
                         setState(() {
                           dairyTotal = int.parse(text);
                           daysDairy = (dairyTotal)/(spdDairy*familyTotal);
-                          print(dairyTotal);
+                          daysDairy = num.parse(daysDairy.toStringAsFixed(1));
                         });
                       },
                     ),
                     TextField(
                       controller: meatController,
                       decoration: InputDecoration(
+                          labelStyle: TextStyle(
+                              fontSize: 22
+                          ),
                           border: InputBorder.none,
                           hintText: '(1..2..3..)',
                           labelText: "Total meats/poultry servings"),
@@ -157,12 +178,16 @@ class _HomePageState extends State<HomePage> {
                         setState(() {
                           meatTotal = int.parse(text);
                           daysMeat = (meatTotal)/(spdMeat*familyTotal);
+                          daysMeat = num.parse(daysMeat.toStringAsFixed(1));
                         });
                       },
                     ),
                     TextField(
                       controller: fatController,
                       decoration: InputDecoration(
+                          labelStyle: TextStyle(
+                              fontSize: 22
+                          ),
                           border: InputBorder.none,
                           hintText: '(1..2..3..)',
                           labelText: "Total fats/oils servings"),
@@ -170,6 +195,7 @@ class _HomePageState extends State<HomePage> {
                         setState(() {
                           fatTotal = int.parse(text);
                           daysFat = (fatTotal)/(spdFat*familyTotal);
+                          daysFat = num.parse(daysFat.toStringAsFixed(1));
                         });
                       },
                     ),
@@ -181,30 +207,87 @@ class _HomePageState extends State<HomePage> {
         //Recommended part
 
         Container(
-            color: Colors.white,
+
+            color: Colors.greenAccent[100],
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                SizedBox(height: 5),
 
                 Text(
                   'According to the 1600 calorie a day diet by Mayo Clinic, a family of $familyTotal with this many servings will run out in this many days: ',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 21,
                   ),
                 ),
-                Text('$daysFruit of fruit'),
-                Text('$daysVegetable of vegetables'),
-                Text('$daysGrains of of grain'),
-                Text('$daysDairy of dairy'),
-                Text('$daysMeat of meats/poultry'),
-                Text('$daysFat of fat')
+                Text('$daysMeat of meats/poulty || $daysVegetable of vegetables',
+                  style: TextStyle(
+                    fontSize: 22
+                  ),
 
+                ),
+                Text('$daysFat of fat || $daysFruit of fruit',
+                  style: TextStyle(
+                      fontSize: 22
+                  ),
 
+                ),
+                Text('$daysDairy of dairy || $daysGrains of grain',
+                  style: TextStyle(
+                      fontSize: 22
+                  ),
 
+                ),
+                SizedBox(height: 10)
 
               ],
             )
+        ),
+        Row(
+        children: <Widget>[
+          Expanded(
+            child: FlatButton.icon(
+              label: Text(
+                'Home'
+              ),
+              icon: Icon(
+                Icons.arrow_left
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ),
+          Expanded(
+            child: IconButton(
+              icon: Icon(
+                Icons.info
+              ),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Info()));
+              },
+
+            )
+          ),
+          Expanded(
+            child: FlatButton.icon(
+              label: Text(
+                'Map'
+              ),
+              icon: Icon(
+                Icons.arrow_right
+              ),
+              onPressed: () {},
+            ),
+          )
+
+        ],
+
+
+
         )]),
     );
   }
