@@ -68,9 +68,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   String country = 'USA';
   String state = 'Texas';
-  String city = 'Austin';
+  String city = 'Katy';
 
   void req(String country, String state, String city) async {
+    // This example uses the Google Books API to search for books about http.
+    // https://developers.google.com/books/docs/overview
     var url = 'https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/stats?country=USA';
 
     // Await the http get response, then decode the json-formatted response.
@@ -100,9 +102,19 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
 
+    String temp = '0';
+
     req(country, state, city);
+    if(s!=null) {
+      temp = s;
+    }
+    else{
+      sleep(Duration(seconds: 1));
+      refreshApp();
+    }
     return Scaffold(
 
     );
   }
 }
+
