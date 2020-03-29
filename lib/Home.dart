@@ -17,7 +17,7 @@ class Home extends StatelessWidget {
                   minWidth: 200,
                   child: RaisedButton(
                     child: Text(
-                      'sup fuckers'
+                      'NAME'
                     ),
                     onPressed: () {
                       Navigator.push(
