@@ -68,23 +68,29 @@ class _MyHomePageState extends State<MyHomePage> {
 
   String country = 'US';
   String state = 'Texas';
+  String city = 'Katy';
 
-  void req(String country, String state) async {
+  void req(String country, String state, String city) async {
     // This example uses the Google Books API to search for books about http.
     // https://developers.google.com/books/docs/overview
-    var url = 'https://api.covid19api.com/live/country/us/status/confirmed';
+    var url = 'https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/stats?country=USA';
 
     // Await the http get response, then decode the json-formatted response.
-    var response = await http.get(url);
+    var response = await http.get(url, headers: {"x-rapidapi-key": "57035e1ba6msh3e5e502bcaba459p1cb3a0jsnd44ba910504b"});
     if (response.statusCode == 200) {
       var jsonResponse = convert.jsonDecode(response.body);
-      for (int i = 1; i < jsonResponse[].length; i++) {
-        if (jsonResponse['stats'][i]['state'] == state) {
-          s = jsonResponse['stats'][i]['state']['latest']['confirmed'].toString();
-          print(jsonResponse['stats'][i]['state']['latest']['confirmed'].toString());
+      for (int i = 1; i < jsonResponse['data']['covid19Stats'].length; i++) {
+        if (jsonResponse['data']['covid19Stats'][i]['province'] == state) {
+          if(jsonResponse['data']['covid19Stats'][i]['city'] == city) {
+            s = jsonResponse['data']['covid19Stats'][i]['confirmed']
+                .toString();
+            print(jsonResponse['data']['covid19Stats'][i]['confirmed']
+                .toString());
+          }
+          else{
+          }
         }
         else{
-          print('No Such State Exists');
         }
       }
     }
@@ -98,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     String temp = '0';
 
-    req(country, state);
+    req(country, state, city);
     if(s!=null) {
       temp = s;
     }
