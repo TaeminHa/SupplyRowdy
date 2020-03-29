@@ -4,11 +4,12 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
+import 'package:supply/api/maps.dart';
 
 
 String s;
 
-void main() => runApp(MyApp());
+void main() => runApp(GMaps());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -65,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return null;
   }
 
-  String country = 'US';
+  String country = 'USA';
   String state = 'Texas';
   String city = 'Katy';
 
@@ -112,10 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
       refreshApp();
     }
     return Scaffold(
-      body: DataTable(columns: [
-        DataColumn(label: Text('State')),
-        DataColumn(label: Text('Confirmed')),],
-          rows: [DataRow(cells: [DataCell(Text(state)), DataCell(Text(temp))])]),
+
     );
   }
 }

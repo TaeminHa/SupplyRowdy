@@ -17,6 +17,11 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  dio: ^1.0.13
+  geolocator:
+  flutter_google_places:
+  location:
+  google_maps_flutter: ^0.5.24+2
   validators:
   http:
   flutter:
@@ -43,7 +48,8 @@ flutter:
   uses-material-design: true
 
   assets:
-     -  assets/CitiesLights.PNG
+    - assets/pin.png
+    - assets/CitiesLights.PNG
 
   # To add assets to your application, add an assets section, like this:
   # assets:
